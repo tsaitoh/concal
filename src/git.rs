@@ -6,15 +6,22 @@ use anyhow::{Context, Result};
 use chrono::{Duration, Local, NaiveDate};
 
 /// 指定したリポジトリから指定週数分のコミット数を日毎に集計する。
-pub fn collect_daily_counts(repo_path: &Path, weeks: u32) -> Result<HashMap<NaiveDate, u32>> {
+pub fn collect_daily_counts(repo_path: &Path, weeks: u32, all_branches: bool) -> Result<HashMap<NaiveDate, u32>> {
     let since = Local::now().naive_local() - Duration::weeks(weeks as i64 - 1);
     let since = since.date().and_hms_opt(0, 0, 0).unwrap();
 
-    let output = Command::new("git")
+    let mut command = Command::new("git");
+    command
         .arg("log")
         .arg("--date=iso")
         .arg(format!("--since={}", since.format("%Y-%m-%d")))
-        .arg("--format=%cd")
+        .arg("--format=%cd");
+
+    if all_branches {
+        command.arg("--all");
+    }
+
+    let output = command
         .current_dir(repo_path)
         .output()
         .context("git logの実行に失敗しました")?;

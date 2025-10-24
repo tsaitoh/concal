@@ -21,13 +21,17 @@ struct Cli {
     /// ANSIカラーの扱い
     #[arg(long, default_value_t = render::ColorChoice::Auto, value_enum)]
     color: render::ColorChoice,
+
+    /// すべてのブランチのアクティビティを考慮する
+    #[arg(short, long)]
+    all: bool,
 }
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
     let repo_path = cli.repo.canonicalize()?;
-    let daily = git::collect_daily_counts(&repo_path, cli.weeks)?;
+    let daily = git::collect_daily_counts(&repo_path, cli.weeks, cli.all)?;
     let grid = calendar::build_grid(&daily, cli.weeks);
     let rendered = render::render(&grid, cli.color.into());
 
