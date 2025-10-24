@@ -11,14 +11,14 @@ To build the project, use Cargo:
 cargo build --release
 ```
 
-The executable will be available at `target/release/contribution_calendar`.
+The executable will be available at `target/release/concal`.
 
 ## Usage
 
 Run the executable with the path to a Git repository.
 
 ```sh
-./target/release/contribution_calendar [PATH_TO_REPO]
+./target/release/concal [PATH_TO_REPO]
 ```
 
 ### Arguments
@@ -34,11 +34,14 @@ Run the executable with the path to a Git repository.
 
 ```sh
 # Analyze the repository in the current directory
-./target/release/contribution_calendar
+./target/release/concal
 
 # Analyze a different repository
-./target/release/contribution_calendar ~/projects/my-repo
+./target/release/concal ~/projects/my-repo
 
 # Display 26 weeks with colors always enabled
-./target/release/contribution_calendar --weeks 26 --color always
+./target/release/concal --weeks 26 --color always
+
+# Consider activity from all branches
+./target/release/concal --all
 ```
