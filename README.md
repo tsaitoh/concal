@@ -29,6 +29,7 @@ Run the executable with the path to a Git repository.
     *   `auto`: (Default) Use colors only if the output is a TTY.
     *   `always`: Always use colors.
     *   `never`: Never use colors.
+*   `-a`, `--all`: (Optional) Consider activity from all branches, not just the current branch.
 
 ### Example
 
