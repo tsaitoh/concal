@@ -1,5 +1,7 @@
 # Contribution Calendar
 
+[![Rust](https://github.com/tsaitoh/concal/actions/workflows/rust.yml/badge.svg)](https://github.com/tsaitoh/concal/actions/workflows/rust.yml)
+
 A CLI tool to display a GitHub-style contribution calendar in the terminal.
 This tool analyzes the commit history of a Git repository and visualizes the contribution activity over the last year.
 
